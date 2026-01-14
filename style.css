@@ -2,7 +2,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color: #0f0f14;
+  background-color: #0d0d12;
   color: white;
   font-family: Arial, sans-serif;
 
@@ -11,14 +11,14 @@ body {
   align-items: center;
 }
 
-/* Main card */
+/* Card */
 .card {
   position: relative;
-  width: 320px;
+  width: 340px;
   padding: 30px;
-  background-color: #1b1b25;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  background-color: #1a1a24;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
 
   display: flex;
   flex-direction: column;
@@ -35,13 +35,18 @@ body {
   font-size: 12px;
   line-height: 14px;
   white-space: pre-wrap;
+
   color: rgba(0, 255, 255, 0.25);
+  opacity: 0.6;
+
   pointer-events: none;
   user-select: none;
   z-index: 0;
+
+  transition: mask-image 0.05s linear;
 }
 
-/* Keep content above matrix */
+/* Foreground content */
 .card > *:not(.matrix) {
   position: relative;
   z-index: 1;
@@ -105,8 +110,4 @@ button:hover {
 
 .denied {
   color: #ff4444;
-}
-
-.offline {
-  color: #ffff00;
 }
