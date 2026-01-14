@@ -8,7 +8,7 @@
 <body>
 
   <div class="card" id="card">
-    <!-- background text -->
+    <!-- matrix background -->
     <pre class="matrix" id="matrix"></pre>
 
     <!-- foreground UI -->
@@ -23,7 +23,7 @@
 
   <script>
     // -------------------
-    // Access logic (placeholder)
+    // Access key logic
     // -------------------
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
 
@@ -73,26 +73,26 @@
 
     generateMatrix();
 
-    // Only update on mouse movement
+    // -------------------
+    // Flashlight effect
+    // -------------------
     card.addEventListener("mousemove", (e) => {
-      generateMatrix();
+      generateMatrix(); // only generate on mousemove
 
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      matrix.style.background = `
-        radial-gradient(
-          circle 140px at ${x}px ${y}px,
-          rgba(0,255,255,0.35),
-          rgba(0,255,255,0.05),
-          transparent 70%
-        )
-      `;
+      // Brighten the text around the mouse
+      matrix.style.background = `radial-gradient(
+        circle 120px at ${x}px ${y}px,
+        rgba(0,255,255,0.5),
+        rgba(0,255,255,0.1)
+      )`;
     });
 
     card.addEventListener("mouseleave", () => {
-      matrix.style.background = "none";
+      matrix.style.background = "none"; // faint everywhere
     });
   </script>
 
