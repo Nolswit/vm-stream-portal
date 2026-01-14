@@ -53,8 +53,8 @@
     const card = document.getElementById("card");
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-    const cols = 38;
-    const rows = 18;
+    const cols = 40;
+    const rows = 22;
 
     function randomChar() {
       return chars[Math.floor(Math.random() * chars.length)];
@@ -77,22 +77,25 @@
     // Flashlight effect
     // -------------------
     card.addEventListener("mousemove", (e) => {
-      generateMatrix(); // only generate on mousemove
+      generateMatrix(); // only update on mouse move
 
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Brighten the text around the mouse
-      matrix.style.background = `radial-gradient(
-        circle 120px at ${x}px ${y}px,
-        rgba(0,255,255,0.5),
-        rgba(0,255,255,0.1)
-      )`;
+      // Stronger flashlight effect
+      matrix.style.background = `
+        radial-gradient(
+          circle 140px at ${x}px ${y}px,
+          rgba(0,255,255,0.6),
+          rgba(0,255,255,0.2),
+          rgba(0,255,255,0.05)
+        )
+      `;
     });
 
     card.addEventListener("mouseleave", () => {
-      matrix.style.background = "none"; // faint everywhere
+      matrix.style.background = "none";
     });
   </script>
 
