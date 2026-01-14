@@ -13,6 +13,7 @@ body {
 .card {
   position: relative;
   width: 340px;
+  height: 400px; /* fixed height for full coverage */
   padding: 28px;
   background-color: #161622;
   border-radius: 12px;
@@ -28,7 +29,7 @@ body {
 .matrix {
   position: absolute;
   inset: 0;
-  padding: 28px;
+  padding: 0;
 
   font-family: monospace;
   font-size: 12px;
@@ -38,7 +39,7 @@ body {
   color: rgba(0, 255, 255, 0.12); /* faint by default */
   pointer-events: none;
   user-select: none;
-  z-index: 0; /* always behind */
+  z-index: 0;
 }
 
 /* Foreground UI */
