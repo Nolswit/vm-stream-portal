@@ -8,10 +8,10 @@
 <body>
 
   <div class="card" id="card">
-    <!-- animated text background -->
-    <div class="matrix" id="matrix"></div>
+    <!-- background text -->
+    <pre class="matrix" id="matrix"></pre>
 
-    <!-- foreground content -->
+    <!-- foreground UI -->
     <h1>VM Access Portal</h1>
     <p id="serviceStatus">Service status: online</p>
 
@@ -23,7 +23,7 @@
 
   <script>
     // -------------------
-    // Access key logic
+    // Access logic (placeholder)
     // -------------------
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
 
@@ -33,15 +33,15 @@
       status.className = "";
 
       if (!key) {
-        status.innerText = "Please enter a key.";
+        status.textContent = "Please enter a key.";
         return;
       }
 
       if (LOCAL_KEYS.includes(key)) {
-        status.innerText = "Access granted. Preparing VM...";
+        status.textContent = "Access granted.";
         status.className = "granted";
       } else {
-        status.innerText = "Invalid access key.";
+        status.textContent = "Invalid key.";
         status.className = "denied";
       }
     }
@@ -52,9 +52,9 @@
     const matrix = document.getElementById("matrix");
     const card = document.getElementById("card");
 
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-    const cols = 36;
-    const rows = 22;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    const cols = 38;
+    const rows = 18;
 
     function randomChar() {
       return chars[Math.floor(Math.random() * chars.length)];
@@ -62,33 +62,37 @@
 
     function generateMatrix() {
       let output = "";
-      for (let i = 0; i < cols * rows; i++) {
-        output += randomChar();
-        if (i % cols === 0) output += "\n";
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          output += randomChar();
+        }
+        output += "\n";
       }
       matrix.textContent = output;
     }
 
     generateMatrix();
-    setInterval(generateMatrix, 200);
 
-    // -------------------
-    // Flashlight effect
-    // -------------------
+    // Only update on mouse movement
     card.addEventListener("mousemove", (e) => {
+      generateMatrix();
+
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      matrix.style.maskImage = `radial-gradient(
-        circle 120px at ${x}px ${y}px,
-        rgba(255,255,255,1),
-        rgba(255,255,255,0)
-      )`;
+      matrix.style.background = `
+        radial-gradient(
+          circle 140px at ${x}px ${y}px,
+          rgba(0,255,255,0.35),
+          rgba(0,255,255,0.05),
+          transparent 70%
+        )
+      `;
     });
 
     card.addEventListener("mouseleave", () => {
-      matrix.style.maskImage = "none";
+      matrix.style.background = "none";
     });
   </script>
 
