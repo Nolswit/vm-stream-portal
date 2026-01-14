@@ -2,7 +2,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color: #1a1a1a;
+  background-color: #0f0f14;
   color: white;
   font-family: Arial, sans-serif;
 
@@ -11,34 +11,57 @@ body {
   align-items: center;
 }
 
-/* Main container */
+/* Main card */
 .card {
-  background-color: #222;
-  padding: 30px;
+  position: relative;
   width: 320px;
+  padding: 30px;
+  background-color: #1b1b25;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
 
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  overflow: hidden;
+}
+
+/* Matrix background */
+.matrix {
+  position: absolute;
+  inset: 0;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 14px;
+  white-space: pre-wrap;
+  color: rgba(0, 255, 255, 0.25);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Keep content above matrix */
+.card > *:not(.matrix) {
+  position: relative;
+  z-index: 1;
 }
 
 /* Title */
-.card h1 {
+h1 {
   margin: 0;
   text-align: center;
   font-size: 22px;
 }
 
-/* Service status text */
+/* Service status */
 #serviceStatus {
   text-align: center;
   font-size: 12px;
-  color: #bbb;
+  color: #aaa;
 }
 
-/* Access key input */
+/* Input */
 #key {
   width: 100%;
   padding: 10px;
@@ -49,7 +72,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Connect button */
+/* Button */
 button {
   width: 100%;
   padding: 12px;
@@ -87,4 +110,3 @@ button:hover {
 .offline {
   color: #ffff00;
 }
-
