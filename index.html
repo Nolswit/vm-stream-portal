@@ -16,13 +16,13 @@
   <p id="status"></p>
 
   <script>
-    // Update this with your deployed backend API URL
-    const API_URL = "https://vm-access-api.vercel.app";
+    // TEMP placeholder: replace with your home PC IP / domain when you’re home
+    const API_URL = "http://PLACEHOLDER_IP:3000";
 
-    // Frontend state
-    let SERVICE_ENABLED = true; // fallback, real toggle comes from backend later
+    // School-safe fallback: local keys
+    const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
+    let SERVICE_ENABLED = true; // toggle for school testing
 
-    // Update service status on page load
     document.getElementById("serviceStatus").innerText =
       SERVICE_ENABLED ? "Service status: online" : "Service status: offline";
 
@@ -31,12 +31,26 @@
       const status = document.getElementById("status");
 
       if (!key) {
-        status.innerText = "Please enter an access key.";
+        status.innerText = "Please enter a key.";
         return;
       }
 
-      status.innerText = "Checking key...";
+      if (!SERVICE_ENABLED) {
+        status.innerText = "Service is currently offline.";
+        return;
+      }
 
+      // TEMP school-safe test: check locally
+      if (LOCAL_KEYS.includes(key)) {
+        status.innerText = "Access granted. Preparing VM...";
+        return;
+      } else {
+        status.innerText = "Invalid access key.";
+        return;
+      }
+
+      // REAL version for home: uncomment later
+      /*
       fetch(`${API_URL}/check-key`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,9 +61,10 @@
         status.innerText = data.message || "Unknown response";
       })
       .catch(err => {
-        console.error(err);
         status.innerText = "Error connecting to API.";
+        console.error(err);
       });
+      */
     }
   </script>
 
