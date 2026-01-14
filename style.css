@@ -3,7 +3,6 @@ body {
   height: 100vh;
   background-color: #0b0b12;
   font-family: Arial, sans-serif;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,11 +21,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-
   overflow: hidden;
 }
 
-/* Background text */
+/* Matrix background */
 .matrix {
   position: absolute;
   inset: 0;
@@ -37,16 +35,13 @@ body {
   line-height: 14px;
   white-space: pre;
 
-  color: rgba(0, 255, 255, 0.18);
-
+  color: rgba(0, 255, 255, 0.12); /* faint by default */
   pointer-events: none;
   user-select: none;
-  z-index: 0;
-
-  background-blend-mode: screen;
+  z-index: 0; /* always behind */
 }
 
-/* Foreground content */
+/* Foreground UI */
 .card > *:not(.matrix) {
   position: relative;
   z-index: 1;
@@ -59,7 +54,7 @@ h1 {
   font-size: 22px;
 }
 
-/* Status text */
+/* Service status */
 #serviceStatus {
   text-align: center;
   font-size: 12px;
@@ -86,7 +81,6 @@ button {
   border-radius: 6px;
   border: none;
   cursor: pointer;
-
   background-color: #00ffff;
   color: black;
 }
@@ -95,7 +89,7 @@ button:hover {
   background-color: #00cccc;
 }
 
-/* Result */
+/* Status message */
 #status {
   min-height: 18px;
   text-align: center;
