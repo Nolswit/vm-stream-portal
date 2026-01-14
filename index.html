@@ -3,100 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>VM Access Portal</title>
+
+  <!-- Link to your CSS file -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="card" id="card">
-    <!-- matrix background -->
-    <pre class="matrix" id="matrix"></pre>
-
-    <!-- foreground UI -->
+  <div class="card">
+    <!-- Top text -->
     <h1>VM Access Portal</h1>
     <p id="serviceStatus">Service status: online</p>
 
-    <input type="text" id="key" placeholder="Enter access key">
+    <!-- Text box -->
+    <input
+      type="text"
+      id="key"
+      placeholder="Enter access key"
+    />
+
+    <!-- Button -->
     <button onclick="submitKey()">Connect</button>
 
+    <!-- Status output -->
     <p id="status"></p>
   </div>
 
   <script>
-    // -------------------
-    // Access key logic
-    // -------------------
+    // Local test keys (school-safe)
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
+    let SERVICE_ENABLED = true;
 
     function submitKey() {
       const key = document.getElementById("key").value.trim();
       const status = document.getElementById("status");
+
       status.className = "";
 
       if (!key) {
-        status.textContent = "Please enter a key.";
+        status.innerText = "Please enter a key.";
+        return;
+      }
+
+      if (!SERVICE_ENABLED) {
+        status.innerText = "Service is offline.";
+        status.className = "offline";
         return;
       }
 
       if (LOCAL_KEYS.includes(key)) {
-        status.textContent = "Access granted.";
+        status.innerText = "Access granted. Preparing VM...";
         status.className = "granted";
       } else {
-        status.textContent = "Invalid key.";
+        status.innerText = "Invalid access key.";
         status.className = "denied";
       }
     }
-
-    // -------------------
-    // Matrix background
-    // -------------------
-    const matrix = document.getElementById("matrix");
-    const card = document.getElementById("card");
-
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-    const cols = 40;
-    const rows = 22;
-
-    function randomChar() {
-      return chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    function generateMatrix() {
-      let output = "";
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          output += randomChar();
-        }
-        output += "\n";
-      }
-      matrix.textContent = output;
-    }
-
-    generateMatrix();
-
-    // -------------------
-    // Flashlight effect
-    // -------------------
-    card.addEventListener("mousemove", (e) => {
-      generateMatrix(); // only update on mouse move
-
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Stronger flashlight effect
-      matrix.style.background = `
-        radial-gradient(
-          circle 140px at ${x}px ${y}px,
-          rgba(0,255,255,0.6),
-          rgba(0,255,255,0.2),
-          rgba(0,255,255,0.05)
-        )
-      `;
-    });
-
-    card.addEventListener("mouseleave", () => {
-      matrix.style.background = "none";
-    });
   </script>
 
 </body>
