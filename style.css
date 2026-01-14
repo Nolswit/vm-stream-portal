@@ -41,6 +41,7 @@ body {
 
 /* Access key input */
 #key {
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border-radius: 6px;
@@ -50,6 +51,7 @@ body {
 
 /* Connect button */
 button {
+  width: 100%;
   padding: 12px;
   font-size: 16px;
   font-weight: bold;
