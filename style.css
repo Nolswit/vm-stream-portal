@@ -1,24 +1,23 @@
-/* Page setup */
 body {
   margin: 0;
   height: 100vh;
-  background-color: #0d0d12;
-  color: white;
+  background-color: #0b0b12;
   font-family: Arial, sans-serif;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
-/* Card */
+/* Card container */
 .card {
   position: relative;
   width: 340px;
-  padding: 30px;
-  background-color: #1a1a24;
+  padding: 28px;
+  background-color: #161622;
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
 
   display: flex;
   flex-direction: column;
@@ -27,23 +26,24 @@ body {
   overflow: hidden;
 }
 
-/* Matrix background */
+/* Background text */
 .matrix {
   position: absolute;
   inset: 0;
+  padding: 28px;
+
   font-family: monospace;
   font-size: 12px;
   line-height: 14px;
-  white-space: pre-wrap;
+  white-space: pre;
 
-  color: rgba(0, 255, 255, 0.25);
-  opacity: 0.6;
+  color: rgba(0, 255, 255, 0.18);
 
   pointer-events: none;
   user-select: none;
   z-index: 0;
 
-  transition: mask-image 0.05s linear;
+  background-blend-mode: screen;
 }
 
 /* Foreground content */
@@ -59,7 +59,7 @@ h1 {
   font-size: 22px;
 }
 
-/* Service status */
+/* Status text */
 #serviceStatus {
   text-align: center;
   font-size: 12px;
@@ -89,25 +89,23 @@ button {
 
   background-color: #00ffff;
   color: black;
-  box-sizing: border-box;
 }
 
 button:hover {
   background-color: #00cccc;
 }
 
-/* Status message */
+/* Result */
 #status {
   min-height: 18px;
   text-align: center;
   font-size: 14px;
 }
 
-/* Status colors */
 .granted {
-  color: #00ff00;
+  color: #00ff88;
 }
 
 .denied {
-  color: #ff4444;
+  color: #ff5555;
 }
