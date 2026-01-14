@@ -1,1 +1,37 @@
+<h1>VM Access Portal</h1>
+
+<p id="serviceStatus">Service status: checking...</p>
+
+<input type="text" id="key" placeholder="Enter access key" />
+<button onclick="submitKey()">Connect</button>
+
+<p id="status"></p>
+<script>
+  const SERVICE_ENABLED = true;
+
+  const VALID_KEYS = [
+    "TEST-1234",
+    "BETA-5678"
+  ];
+
+  function submitKey() {
+    const key = document.getElementById("key").value.trim();
+    const status = document.getElementById("status");
+
+    if (!SERVICE_ENABLED) {
+      status.innerText = "Service is currently offline.";
+      return;
+    }
+
+    if (!VALID_KEYS.includes(key)) {
+      status.innerText = "Invalid access key.";
+      return;
+    }
+
+    status.innerText = "Access granted. Preparing VM...";
+  }
+
+  document.getElementById("serviceStatus").innerText =
+    "Service status: online";
+</script>
 
