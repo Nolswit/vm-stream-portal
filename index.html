@@ -3,50 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>VM Access Portal</title>
-
-  <!-- Link to your CSS file -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="card">
-    <!-- Top text -->
+    <!-- animated background -->
+    <div class="matrix"></div>
+
+    <!-- real content -->
     <h1>VM Access Portal</h1>
     <p id="serviceStatus">Service status: online</p>
 
-    <!-- Text box -->
-    <input
-      type="text"
-      id="key"
-      placeholder="Enter access key"
-    />
-
-    <!-- Button -->
+    <input type="text" id="key" placeholder="Enter access key">
     <button onclick="submitKey()">Connect</button>
 
-    <!-- Status output -->
     <p id="status"></p>
   </div>
 
   <script>
-    // Local test keys (school-safe)
+    // ---- ACCESS KEY LOGIC ----
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
-    let SERVICE_ENABLED = true;
 
     function submitKey() {
       const key = document.getElementById("key").value.trim();
       const status = document.getElementById("status");
-
       status.className = "";
 
       if (!key) {
         status.innerText = "Please enter a key.";
-        return;
-      }
-
-      if (!SERVICE_ENABLED) {
-        status.innerText = "Service is offline.";
-        status.className = "offline";
         return;
       }
 
@@ -58,6 +43,36 @@
         status.className = "denied";
       }
     }
+
+    // ---- MATRIX BACKGROUND EFFECT ----
+    const matrix = document.querySelector(".matrix");
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    const columns = 32;
+    const rows = 18;
+
+    function randomChar() {
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    function generateMatrix(intensity = 1) {
+      let output = "";
+      for (let i = 0; i < columns * rows; i++) {
+        if (Math.random() < intensity) {
+          output += randomChar();
+        } else {
+          output += " ";
+        }
+        if (i % columns === 0) output += "\n";
+      }
+      matrix.textContent = output;
+    }
+
+    generateMatrix();
+
+    document.addEventListener("mousemove", (e) => {
+      const intensity = Math.min(e.movementX * e.movementY * 0.0005, 1);
+      generateMatrix(Math.abs(intensity));
+    });
   </script>
 
 </body>
