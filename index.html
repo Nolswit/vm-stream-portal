@@ -3,40 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>VM Access Portal</title>
-
-  <!-- Link to your CSS file -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="card">
-    <!-- Top text -->
     <h1>VM Access Portal</h1>
     <p id="serviceStatus">Service status: online</p>
 
-    <!-- Text box -->
-    <input
-      type="text"
-      id="key"
-      placeholder="Enter access key"
-    />
-
-    <!-- Button -->
+    <input type="text" id="key" placeholder="Enter access key" />
     <button onclick="submitKey()">Connect</button>
 
-    <!-- Status output -->
     <p id="status"></p>
   </div>
 
   <script>
-    // Local test keys (school-safe)
-    const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
+    // ---- CONFIG ----
+    const LOCAL_KEYS = ["TEST-1234", "BETA-5678"]; // test keys
     let SERVICE_ENABLED = true;
+    const HOME_SERVER = "http://YOUR_HOME_PC_IP:3000"; // placeholder
 
+    // ---- HANDLE KEY SUBMISSION ----
     function submitKey() {
       const key = document.getElementById("key").value.trim();
       const status = document.getElementById("status");
-
       status.className = "";
 
       if (!key) {
@@ -53,9 +43,30 @@
       if (LOCAL_KEYS.includes(key)) {
         status.innerText = "Access granted. Preparing VM...";
         status.className = "granted";
+
+        // Trigger backend request (placeholder)
+        requestVM(key);
       } else {
         status.innerText = "Invalid access key.";
         status.className = "denied";
+      }
+    }
+
+    // ---- PLACEHOLDER BACKEND REQUEST ----
+    async function requestVM(key) {
+      try {
+        const response = await fetch(`${HOME_SERVER}/launch-vm`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ key })
+        });
+
+        const data = await response.json();
+        console.log(data);
+        alert(data.message);
+      } catch (err) {
+        console.error(err);
+        alert("Failed to contact home server (placeholder).");
       }
     }
   </script>
