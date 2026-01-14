@@ -16,13 +16,14 @@
   <p id="status"></p>
 
   <script>
-    // TEMP placeholder: replace with your home PC IP / domain when you’re home
+    // TEMP placeholder for home PC IP / domain
     const API_URL = "http://PLACEHOLDER_IP:3000";
 
-    // School-safe fallback: local keys
+    // Local school-safe keys for testing
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
-    let SERVICE_ENABLED = true; // toggle for school testing
+    let SERVICE_ENABLED = true;
 
+    // Show status on load
     document.getElementById("serviceStatus").innerText =
       SERVICE_ENABLED ? "Service status: online" : "Service status: offline";
 
@@ -40,7 +41,7 @@
         return;
       }
 
-      // TEMP school-safe test: check locally
+      // TEMP school-safe local key check
       if (LOCAL_KEYS.includes(key)) {
         status.innerText = "Access granted. Preparing VM...";
         return;
@@ -49,7 +50,7 @@
         return;
       }
 
-      // REAL version for home: uncomment later
+      // REAL version for home (uncomment later)
       /*
       fetch(`${API_URL}/check-key`, {
         method: "POST",
