@@ -1,3 +1,82 @@
-head {
-  text-align: center;
+/* Overall page styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
+/* Card container */
+.card {
+  background-color: #222;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* Heading */
+h1 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #00ffff;
+}
+
+/* Service status */
+#serviceStatus {
+  font-size: 12px;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+/* Input box */
+input#key {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #00ffff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #00bbbb;
+}
+
+/* Status messages */
+#status {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Status colors */
+.granted {
+  color: #0f0;
+}
+
+.denied {
+  color: #f00;
+}
+
+.offline {
+  color: #ff0;
+}
+
