@@ -16,14 +16,11 @@
   <p id="status"></p>
 
   <script>
-    // Toggle this to enable / disable the entire service
-    const SERVICE_ENABLED = true;
+    // Update this with your deployed backend API URL
+    const API_URL = "https://YOUR_API_URL_HERE";
 
-    // Temporary access keys (will move to backend later)
-    const VALID_KEYS = [
-      "TEST-1234",
-      "BETA-5678"
-    ];
+    // Frontend state
+    let SERVICE_ENABLED = true; // fallback, real toggle comes from backend later
 
     // Update service status on page load
     document.getElementById("serviceStatus").innerText =
@@ -33,29 +30,26 @@
       const key = document.getElementById("key").value.trim();
       const status = document.getElementById("status");
 
-      if (!SERVICE_ENABLED) {
-        status.innerText = "Service is currently offline.";
-        return;
-      }
-
       if (!key) {
         status.innerText = "Please enter an access key.";
         return;
       }
 
-      checkKey(key);
-    }
+      status.innerText = "Checking key...";
 
-    // Placeholder for real backend check later
-    function checkKey(key) {
-      const status = document.getElementById("status");
-
-      if (!VALID_KEYS.includes(key)) {
-        status.innerText = "Invalid access key.";
-        return;
-      }
-
-      status.innerText = "Access granted. Preparing VM...";
+      fetch(`${API_URL}/check-key`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key })
+      })
+      .then(res => res.json())
+      .then(data => {
+        status.innerText = data.message || "Unknown response";
+      })
+      .catch(err => {
+        console.error(err);
+        status.innerText = "Error connecting to API.";
+      });
     }
   </script>
 
