@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VM Access Portal</title>
+
+  <!-- Link to your CSS file -->
   <link rel="stylesheet" href="style.css">
-  <head>
-    <meta charset="UTF-8">
-    <title>VM Access Portal</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
+</head>
 <body>
 
-  <h1>VM Access Portal</h1>
+  <div class="card">
+    <!-- Top text -->
+    <h1>VM Access Portal</h1>
+    <p id="serviceStatus">Service status: online</p>
 
-  <p id="serviceStatus">Service status: checking...</p>
+    <!-- Text box -->
+    <input
+      type="text"
+      id="key"
+      placeholder="Enter access key"
+    />
 
-  <input type="text" id="key" placeholder="Enter access key" />
-  <button onclick="submitKey()">Connect</button>
+    <!-- Button -->
+    <button onclick="submitKey()">Connect</button>
 
-  <p id="status"></p>
+    <!-- Status output -->
+    <p id="status"></p>
+  </div>
 
   <script>
-    // TEMP placeholder for home PC IP / domain
-    const API_URL = "http://PLACEHOLDER_IP:3000";
-
-    // Local school-safe keys for testing
+    // Local test keys (school-safe)
     const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
     let SERVICE_ENABLED = true;
-
-    // Show status on load
-    document.getElementById("serviceStatus").innerText =
-      SERVICE_ENABLED ? "Service status: online" : "Service status: offline";
 
     function submitKey() {
       const key = document.getElementById("key").value.trim();
       const status = document.getElementById("status");
+
+      status.className = "";
 
       if (!key) {
         status.innerText = "Please enter a key.";
@@ -39,35 +45,18 @@
       }
 
       if (!SERVICE_ENABLED) {
-        status.innerText = "Service is currently offline.";
+        status.innerText = "Service is offline.";
+        status.className = "offline";
         return;
       }
 
-      // TEMP school-safe local key check
       if (LOCAL_KEYS.includes(key)) {
         status.innerText = "Access granted. Preparing VM...";
-        return;
+        status.className = "granted";
       } else {
         status.innerText = "Invalid access key.";
-        return;
+        status.className = "denied";
       }
-
-      // REAL version for home (uncomment later)
-      /*
-      fetch(`${API_URL}/check-key`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key })
-      })
-      .then(res => res.json())
-      .then(data => {
-        status.innerText = data.message || "Unknown response";
-      })
-      .catch(err => {
-        status.innerText = "Error connecting to API.";
-        console.error(err);
-      });
-      */
     }
   </script>
 
