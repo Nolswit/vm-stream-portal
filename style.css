@@ -3,7 +3,7 @@ body {
   margin: 0;
   height: 100vh;
   background-color: #1a1a1a;
-  color: brown;
+  color: white;
   font-family: Arial, sans-serif;
 
   display: flex;
@@ -60,7 +60,7 @@ button {
   border: none;
   cursor: pointer;
 
-  background-color: #00ffff;
+  background-color: #ffffff;
   color: black;
   box-sizing: border-box;
 }
