@@ -1,70 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding -->
   <meta charset="UTF-8">
+
+  <!-- Page title shown in browser tab -->
   <title>VM Access Portal</title>
+
+  <!-- Link to external CSS file -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Main UI container (the card in the center of the page) -->
   <div class="card">
+
+    <!-- Main title text -->
     <h1>VM Access Portal</h1>
+
+    <!-- Service status display (static for now) -->
     <p id="serviceStatus">Service status: online</p>
 
-    <input type="text" id="key" placeholder="Enter access key" />
+    <!-- Text input where user enters their access key -->
+    <input
+      type="text"
+      id="key"
+      placeholder="Enter access key"
+    />
+
+    <!-- Button that triggers key submission -->
     <button onclick="submitKey()">Connect</button>
 
+    <!-- Area where status messages appear (granted / denied / errors) -->
     <p id="status"></p>
   </div>
 
   <script>
-    // ---- CONFIG ----
-    const LOCAL_KEYS = ["TEST-1234", "BETA-5678"]; // test keys
-    let SERVICE_ENABLED = true;
-    const HOME_SERVER = "http://YOUR_HOME_PC_IP:3000"; // placeholder
+    // ---------------- CONFIG ----------------
 
-    // ---- HANDLE KEY SUBMISSION ----
+    // Temporary test keys used for local testing
+    // These will later be replaced by backend validation
+    const LOCAL_KEYS = ["TEST-1234", "BETA-5678"];
+
+    // Flag to simulate whether the service is online or offline
+    let SERVICE_ENABLED = true;
+
+    // Placeholder URL for your home PC backend
+    // This will later be replaced with your real public IP
+    const HOME_SERVER = "http://YOUR_HOME_PC_IP:3000";
+
+    // ---------------- MAIN FUNCTION ----------------
+
+    // Runs when the user clicks the "Connect" button
     function submitKey() {
+      // Grab the value from the input field
       const key = document.getElementById("key").value.trim();
+
+      // Reference to the status message element
       const status = document.getElementById("status");
+
+      // Clear any previous status color
       status.className = "";
 
+      // If the input is empty, stop and show a message
       if (!key) {
         status.innerText = "Please enter a key.";
         return;
       }
 
+      // If the service is disabled, stop and show offline message
       if (!SERVICE_ENABLED) {
         status.innerText = "Service is offline.";
         status.className = "offline";
         return;
       }
 
+      // Check if the entered key exists in the local test list
       if (LOCAL_KEYS.includes(key)) {
+        // Show success message
         status.innerText = "Access granted. Preparing VM...";
         status.className = "granted";
 
-        // Trigger backend request (placeholder)
+        // Trigger backend request (placeholder for now)
         requestVM(key);
       } else {
+        // Show failure message
         status.innerText = "Invalid access key.";
         status.className = "denied";
       }
     }
 
-    // ---- PLACEHOLDER BACKEND REQUEST ----
+    // ---------------- BACKEND REQUEST (PLACEHOLDER) ----------------
+
+    // Sends the access key to the backend running on your home PC
     async function requestVM(key) {
       try {
+        // Send POST request to backend
         const response = await fetch(`${HOME_SERVER}/launch-vm`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({ key })
         });
 
+        // Parse backend response
         const data = await response.json();
+
+        // Log response for debugging
         console.log(data);
+
+        // Show message from backend
         alert(data.message);
       } catch (err) {
+        // If the backend cannot be reached
         console.error(err);
         alert("Failed to contact home server (placeholder).");
       }
