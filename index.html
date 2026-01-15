@@ -48,6 +48,9 @@
     // Placeholder URL for your home PC backend
     // This will later be replaced with your real public IP
     const HOME_SERVER = "http://YOUR_HOME_PC_IP:3000";
+    // Special admin key used to toggle the service on/off (temporary, local)
+    const ADMIN_KEY = "ADMIN-OFFLINE-9999";
+
 
     // ---------------- MAIN FUNCTION ----------------
 
@@ -61,6 +64,26 @@
 
       // Clear any previous status color
       status.className = "";
+      // ----- ADMIN KEY CHECK -----
+      if (key === ADMIN_KEY) {
+        SERVICE_ENABLED = !SERVICE_ENABLED;
+
+        if (SERVICE_ENABLED) {
+          status.innerText = "Service enabled.";
+          status.className = "granted";
+          document.getElementById("serviceStatus").innerText =
+            "Service status: online";
+        } else {
+          status.innerText = "Service disabled.";
+          status.className = "offline";
+          document.getElementById("serviceStatus").innerText =
+            "Service status: offline";
+        }
+
+        // Stop here — admin key should not continue to normal logic
+        return;
+      }
+
 
       // If the input is empty, stop and show a message
       if (!key) {
