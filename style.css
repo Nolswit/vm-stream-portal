@@ -1,4 +1,6 @@
-/* Page setup */
+/* -------- PAGE SETUP -------- */
+
+/* Full-screen dark background and center alignment */
 body {
   margin: 0;
   height: 100vh;
@@ -11,7 +13,9 @@ body {
   align-items: center;
 }
 
-/* Main container */
+/* -------- MAIN CARD -------- */
+
+/* The centered container holding all UI elements */
 .card {
   background-color: #222;
   padding: 30px;
@@ -24,21 +28,27 @@ body {
   gap: 12px;
 }
 
-/* Title */
+/* -------- TITLE -------- */
+
+/* Main heading text */
 .card h1 {
   margin: 0;
   text-align: center;
   font-size: 22px;
 }
 
-/* Service status text */
+/* -------- SERVICE STATUS -------- */
+
+/* Small status text under the title */
 #serviceStatus {
   text-align: center;
   font-size: 12px;
   color: #bbb;
 }
 
-/* Access key input */
+/* -------- ACCESS KEY INPUT -------- */
+
+/* Text input styling */
 #key {
   width: 100%;
   padding: 10px;
@@ -49,7 +59,9 @@ body {
   box-sizing: border-box;
 }
 
-/* Connect button */
+/* -------- CONNECT BUTTON -------- */
+
+/* Button styling */
 button {
   width: 100%;
   padding: 12px;
@@ -64,27 +76,33 @@ button {
   box-sizing: border-box;
 }
 
+/* Button hover effect */
 button:hover {
   background-color: #00cccc;
 }
 
-/* Status message */
+/* -------- STATUS MESSAGE -------- */
+
+/* Area where messages appear */
 #status {
   min-height: 18px;
   text-align: center;
   font-size: 14px;
 }
 
-/* Status colors */
+/* -------- STATUS COLORS -------- */
+
+/* Success state */
 .granted {
   color: #00ff00;
 }
 
+/* Failure state */
 .denied {
   color: #ff4444;
 }
 
+/* Offline state */
 .offline {
   color: #ffff00;
 }
-
